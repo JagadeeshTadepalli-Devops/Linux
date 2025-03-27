@@ -1,0 +1,610 @@
+LINUX COMMANDS:
+
+--------------------------------------------------
+- present working directory
+
+   $pwd
+
+- file creation:
+
+    $touch file1 file2
+
+    $vim filename
+       insert mode: esc+i
+       save and quit: esc+:wq!
+
+    $cp sourcefilename desination filename
+
+
+- displaying file data:
+     $cat filename
+
+- remove file :
+
+   $rm filename
+
+----------------------------------------------------
+- directory creation:
+
+   $mkdir
+
+- remove directory:
+
+   $rm -r dir_name
+
+- listing the files and directory:
+
+   NU$ls -ltr
+   $ls -l
+   $ls -ltra ('a'  - hidden files )
+
+- change directory:
+
+     -forwrd
+        $cd dir_name
+        $cd dir1/dir2/
+
+    -backward:
+        $cd ..
+        $cd ../../../..
+
+------------------------------------------------------
+- finding files and directories
+
+       $find . -name "filename/directory name"
+
+       $locate filename/directoryname
+
+------------------------------------------------------
+
+- Wild cards
+
+    * - zero or more characters
+    ? - single character
+    [] - including
+
+-------------------------------------------------------
+- File permissions
+
+  ls -ltr
+
+      type | no.of_links | owner | group | size | month | day | time | Name
+
+  - user
+  - group
+  - organisation
+
+
+     file - rwx rwx rwx
+            u   g   o
+
+   $chmod persmission filename
+
+- numeric file permisiions
+
+     0 -> no permission          (---)
+     1 -> execute                (--X)
+     2 -> write                  (-w-)
+     3 -> execute + write        (-wx)
+     4 -> read                   (r--)
+     5 -> read + execute         (r-x)
+     6 -> read + write           (rw-)
+     7 -> read + write + execute (rwx)
+
+
+
+---------------------------------------------------------
+
+- File ownership
+
+    -ownership will be changed by only root account so use
+
+          $su -
+          $sudo
+
+    - to change owner of file
+
+          $sudo chown new_username filename
+
+    - to change group of file
+
+          $sudo chgrp new_username filename
+
+    - how to add users
+
+          $sudo adduser new_username
+
+    - how to check list of users
+
+          $cut -d: -f1 /etc/passwd
+
+
+    - how to add group
+
+    $sudo groupadd group_name
+
+    - Verifying the group
+
+    $cat /etc/group
+
+    - Adding a user to the group
+
+    $sudo usermod -aG group_name file_name
+----------------------------------------------
+
+-Access control list( rwxrw-r--+)
+
+   1. To add permission for user
+
+       $setfacl -m u:user:rwx /path/to/file
+
+   2. To add permission for agroup
+
+        $setfacl -m u:user:rwx /path/to/file
+
+   3. To remove a specific entry
+
+        $setfacl -x u:user /path/to/file
+
+   4. To remove all entries
+
+        $setfacl -b path/to/file(for all users)
+
+   5. To allow all files or directories to inherit ACL entries from the directory it is within
+
+        $setfacl -Rm "entry" /path/to/file
+
+----------------------------------------------------------
+
+-Help commands
+
+
+    $whatis command
+
+    $man command
+
+    $command --help
+
+---------------------------------------------------------
+
+- Adding text to files
+
+
+   - vi
+   - echo > or >>
+   - > or >>
+
+   >   means replace/overwrite
+   >>  means append
+
+--------------------------------------------------------
+
+-TAB and Up Arrow
+
+   - halfcommandname <tab>
+
+   - Uparrow gives th previous cammand executed
+
+------------------------------------------------------
+- Input and output redirects
+
+  we have 3 redirects in linux
+
+     1. Standard Input (stdin)- it has file descriptor as 0
+           - Input is used when feeding file contents to afile
+              Eg: ct < listings
+
+     2. Standard Output (stdout)- it has file descriptor as 1
+           - by default when running a command its out put goes to the terminal
+           - The output of a command can be routed to a file > symbol
+             Eg: ls -l > listings
+
+           - If using the same file for additional output or to append to the same file
+             Eg: pwd >> listings
+
+     3. Standard error (stderr)- it has file descriptor as 2
+           - when a command is executed we use a keyboard and that is also considered (stdin -0)
+           - The command output goes to the montor and that output is (stdout -1)
+           - If the command produced any error on the screen then it is considered (stderr -2)
+                - we can use redirect those errors to route errors from screen
+                  Eg: telnet localhost 2> errorfile
+-------------------------------------------------------------------------------------------------
+
+- Standrd output to a File (tee)
+
+      - "tee" command is used to store and view (both at the same time) the output of any command
+
+      $ echo "jagadeesh " | tee filename
+
+      $ echo "is a nice person" | tee -a filename        -- to append the data to same file
+
+-------------------------------------------------------------------------------------------------
+
+-Pipes
+
+     - A pipe(|) is used by the shell to connect the output of one command directlyto
+       the input of antother command
+
+      $ ps -ef | grep -i verbose
+
+-------------------------------------------------------------------------------------------------
+
+- File Maintenance Commands(cp,rm, mv, mkdir, rmdir, chgrp, chown)
+
+  - Copy command
+
+     $ cp source_filename destination_filename
+
+  - remove file/directory command
+
+      $ rm filename    # to remove a file
+
+      $ rm -r dir_name # to remove a directory
+
+      $ rm -Rf dir_namee # to remove forcefully all its subdirectories and its content
+
+  - moving a file or to rename file
+
+      $ mv sourcefilename renamefilename #to rename a file
+
+      $ mv filename destination_location #to change location of a file
+
+  - to create directory
+
+     $ mkdir dir_name
+
+  - to remove directory
+
+     $ rmdir dir_name
+
+  - to change owner of file
+
+     $ sudo chown new_username filename
+
+  - to change group of file
+
+     $ sudo chgrp new_username filename
+
+-----------------------------------------------------------------------------------
+
+
+File Display commands( cat, more, less, head, tail)
+
+
+
+  - to display entire content of a file
+
+     $ cat file_name
+
+  - to display entire content in one page
+
+     $ more filename
+
+  - to display the content in sepaate screen
+
+     $ less filename  # click q to exit from the screen
+
+  - to display the first 10 lines of a file
+
+     $ head fielname
+
+  - to display the last 10 lines of a fie
+
+     $ tail filename
+
+----------------------------------------------------------------------------------
+
+Filters/ text processors commands:
+
+   $ cut - cut the output
+
+   $ awk - list by cloumns
+
+   $ grep or egrep - search by keywords
+
+   $ sort - sort the output in alphabetical oorder
+
+   $ uniq - eliminates duplicates from the output
+
+   $ wc - gives the count of chars,words, lines, by bytes
+
+----------------------------------------------------------------------------------
+
+Cut command - cut is a command line utility that allow you to cut part of lines from
+              specified files or piped data and print the result to standard output.
+              it can be used to cut part of a line by delimiter, byte positions, and character
+
+
+  $ cut filename              #does not work
+
+  $ cut --version             #to check the version
+
+  $ cut --help                # to check more details of the command
+
+  $ cut -c1 filename          #to list first/one charcter in everyline of a file
+
+  $ cut -c1,2,3,7,8 filename  # to list character we want in every line of a file
+
+  $ cut -c1-8 filename        # to list characters for range in a file
+
+  $ cut -c1-5, 5-8 filename   #to list characters for specific range in a file
+
+  $ cut -b1-3 filename        #list by byte size
+
+  $ cut  -d: -f 6 command    #list the cloumn by number which is separeted by delimeter
+
+  $ cut  -d: -f 6-7 command   # list eh coulumn ny range which is separated by delimiter
+
+  $ ls -l | cut -c2-4         # we can also cut by piping with commands
+
+  $ ......so many examples we can try
+
+
+---------------------------------------------------------------------------------------
+
+
+awk command - awk is a utility/language designed for data extraction. Most of the time
+              it is used to extractt fields from a file or from an output
+
+
+  $ awk --version               #to check the version
+
+  $ awk '{print $1}' filename   # to print the first column of the output/file
+
+  $ ls -l | awk '{print $1,$3}' # to print first and 3rd column of the output
+
+  $ ls -l | awk '{print $NF}'    # to print last field/coloumn of the output
+
+  $ awk '/Jerry/ {print} ' file  # to print specific word from a file/ output
+
+
+  $ awk -F: '{print $1}' /etc/passwd #output only 1st field of etc/passwd
+
+  $ echo "Hello Tom" | awk '{$2="Adam" ; print $0}' #to replace fields words
+
+  $ cat file | awk '{$2="Imran" ; print $0}' #to replace field words
+
+  $ awk 'length($0) >15' file #to get lines that have more than 15 bytes size
+
+  $ ls -l | awk '(if($9 == "seinfeld") print $0;)' #to get the fields matching with seinfeld
+
+  $ ls -l | awk '{print NF}' #it gives the nukmber of fields
+
+----------------------------------------------------------------------------------------------------------------
+
+Grep command (search for specific keyword) - "global expression print" processors text line by line and prints any lines which match a specific pattern
+
+
+
+   $ grep --version
+   $ grep --help
+
+   $ grep keyword file # search for keyword from a file
+
+   $ grep -c keyword file # search for keyword and count
+
+   $ grep -i keyword file # search for keyword and ignore case sensitive
+
+   $ grep -n keyword file # disply the matched lines and their line numbers
+
+   $ grep -v keyword file # display everything but keyword
+
+   $ grep keyword file | awk '{print $1}' #search for keyword and then only the 1st field
+
+   $ ls -l| grep Desktop   #search for keyword and the only give the first field
+
+
+
+
+   $ egrep -i "keyword1 | keyword2" file # search for 2 keywords
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Sort and uniq commands:
+
+-Sort command sorts in alphabetical order
+-uniq command filters out the repeated or duplicated lines
+
+
+Sort:
+-----
+
+   $ sort --version
+   $ sort --help
+
+
+   $ sort file   #sort the file in alphabetical order
+
+   $ sort -r file #sort in reverse alphabetical order
+
+   $ sort -k2 file # sort by field number
+
+
+Uniq:
+-----
+
+   $ uniq file         #removes duplicates
+
+   $ sort file | uniq  #Always sort the first before using uniq their line numbers
+
+   $ sort file | uniq -c #Sort first then uniq and list count
+
+   $ sort file | uniq -d #only shows repeated lines
+
+
+--------------------------------------------------------------------------------------------------------
+
+
+-wc commnad: the command reads either standard input or alist of files and generates : newline count, word count and byte count
+
+
+   $ wc --version
+   $ wc --help
+
+   $ wc file    #check file in line count, word count and byte count
+
+   $ wc -l file  # get the no.of lines in a file
+
+   $ wc -w file  #get the no.of words in a file
+
+   $ wc -b file  #get the no.of bytes in a file
+
+   $ wc DIRECTORY #NOT allowed
+
+   $ ls -l | wc -l #no.of files
+
+   $ grep keyword | wc -l #no.of keyword lines
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+compare files:
+
+
+-diff (line by line):
+
+   $ diff file1 file2
+
+   $ man diff #to learn more
+
+-cmp  (byte by byte):
+
+   $ cmp file1 and file2
+
+   $ man cmp #to learn more
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+Compress and uncompress files (tar, gzip, gunzip)
+
+tar:
+----
+- it takes bunch files together and put them in a kind of a container and make it like a into one file
+
+- and it does not compress or reduces the size of the files inside the container like gzip would do
+
+gzip:
+-----
+
+-used to compress the file
+
+
+
+gzip -d (or)gunzip:
+--------------
+
+-used to uncompress the file
+
+
+
+  $ tar cvf dir_name.tar pathofthedirectory    # making zip of all the file in directory
+
+  $ tar xvf dir_name.tar           #untaring the containre
+
+  $ gzip dir_name.tar    #to compress file
+
+  $ gzip -d dir_name.tar (or) $ gunzip dir_name.tar #to uncompress file
+
+
+----------------------------------------------------------------------------------------------------------
+
+-Truncate file size(truncate):
+
+-used to shrink or extend the size of a file to the specified size
+-data will be chopped if we shrink the orginal file
+
+  $ truncate -s 10 filename
+
+----------------------------------------------------------------------------------------------------------
+
+-combining and splitting files:
+
+-Mutliple files can be combined into one
+
+   $cat f1 f2 f3 f4 > file4
+
+-One file can be split into multiple files
+
+   $split file4
+
+   $ split -l 300 file.txt childfile
+
+      #split file.txt into 300 per file and output to childfile-a,b,c
+
+--------------------------------------------------------------------------------------------------------------
+
+-Executing Multiple commands with ;
+
+$ ls ; pwd; whoami;
+
+
+COMMAND CHAINING:
+
+-Scripting
+-Automation
+-Daily Tasks
+---------------------------------------------------------------------------------------------
+
+Linux commands vs windows commnads
+
+
+
+linux   ->  windows
+--------------------
+ls -l   ->    dir    #listing of a directory
+
+mv      ->    ren    #rename a file
+
+cp      ->    copy   #copy afile
+
+mv      ->    move   #move a file
+
+clear   ->    cls    #clear screen
+
+rm      ->    del    #delete afile
+
+diff    ->    fc     #compare contents of a file
+
+grep    ->    find   #search for word/string ina file
+
+man command -> commnds /? #display help command
+
+pwd     ->    chdir  #present working dir
+
+date    ->    time   # display the time
+
+
+
+----------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------
+
+
+
