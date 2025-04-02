@@ -1,0 +1,125 @@
+-Linux file editor
+------------------------------------------------------------------
+- A text editor is a program which enables you to create and manipulate data in alinux file
+
+- There are several standard text editors available on most linux systems
+         -vi, ed, ex, emacs, pico, vim
+
+-Vi editor is available almost in every linux distrubution
+
+-Introduction to vi editor 
+  $ vi filename
+
+- Most common keys 
+      esc -Escape out of any mode
+      i   -insert
+      r   -replace
+      d   -delete
+      :q! -quit without saving
+      :wq!-quit and save
+
+-------------------------------------------------------------------------
+"sed" command
+
+-Replace a string in afile with new file
+-find and delete a line
+-remove empty line from a file
+-remove the first line or no.of lines in a file
+-To replace tabs with spaces
+-show defined lines from afile
+-substitute within vi editor
+-and much more......
+
+$ sed 's/wordwanttoreplace/newword/g' file_name
+   # to replace string
+   # s-substitie, g-global/Anywhere
+   # this command will change on screen only, not change in the file
+
+$ sed -i 's/wordwanttoreplace/newword/g' file_name
+   # to replace permenantly
+
+$ sed 's/wordneedtoremove/g' filenanme    #to remove the from file
+$ sed -i 's/wordneedtoremove/g' filenanme # to remove permenantly
+
+------
+#how to find s string in line and remove it
+
+$ sed '/wordToRemove/d' filename
+
+#how to remove empty lines
+
+$sed '/^$/d' filename
+   ^- anything starts with
+   $- anything that ends with
+
+#to remove the first line of the file
+
+$ sed '1d' filename 
+
+$ sed '1,2d' fiename
+
+$ sed 's/\t/ /g' filename  #to replace tabs with spaces
+
+$ sed -n 12,18p filename   #to view 12-18lines
+
+$ sed 12,18d               #to view except 12-18 lines
+
+$ sed G filename           #every line with space
+
+$ sed '8!s/wordToReplace/newword/' #except line 8 other will be changed
+
+#in vi editor
+
+$ vi filename
+:%s/oldword/newword/
+
+---------------------------------------------------------------------------------------
+
+User Account Managment:
+
+commands:
+-useradd  #to create new user
+-groupadd #to create new group
+-userdel  #to delete the user
+-groupdel #to delete the group
+-usermod  #to modify user
+
+- whenever we create a new user those user management are created.
+  Their record is maintained in three different files.
+  files:
+    -/etc/passwd
+    -/etc/group
+    -/etc/shadow
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+ 
